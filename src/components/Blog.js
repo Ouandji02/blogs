@@ -1,12 +1,12 @@
-import { Avatar, Card, CardContent, Grid } from '@material-ui/core'
+import { Avatar, Button, Card, CardActions, CardContent, Grid } from '@material-ui/core'
 import { CardHeader } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export default function Blog() {
+const Blog = ({props}) => {
     const [post, setPost] = useState([]);
     useEffect(() => {
-        axios('http://localhost:5000/all-blogs')
+        axios('http://localhost:8080/all-blogs')
             .then(result => {
                 setPost(result.data)
             })
@@ -14,16 +14,27 @@ export default function Blog() {
                 console.log(err)
             })
     }, [])
+
+    const update = (id) => {
+        props.history.push(`/update/${id}`)
+    }
+
+
+    const deleteItem = (id) => {
+        console.log(id)
+        axios.delete(`http://localhost:8080/delete/${id}`);
+    }
+
+    console.log('propriete',props)
     return (
         <div>{console.log(post)}
             <Grid container direction="row" spacing={3}>
                 {post.map((element, key) => (
-                    <Grid key={key} item lg={4} xs={4}>
+                    <Grid key={key} item lg={4} xs={6} md={4} sx={6}>
                         <Card fullwidth>
                             <CardHeader
                                 avatar={
-                                    <Avatar aria-label="recipe" >
-                                        R
+                                    <Avatar aria-label="recipe" >e
                                     </Avatar>
                                 }
                                 title={element.nom}
@@ -32,6 +43,14 @@ export default function Blog() {
                             <CardContent>
                                 {element.message}
                             </CardContent>
+                            <CardActions>
+                                    <Button type="submit" color="secondary" onClick={() => deleteItem(element._id)}>
+                                        supprimer
+                                    </Button>
+                                    <Button type="submit" color="primary" onClick={() => update(element._id)}>
+                                       Update
+                                    </Button>
+                            </CardActions>
                         </Card>
                     </Grid>
 
@@ -42,3 +61,5 @@ export default function Blog() {
         </div>
     )
 }
+
+export default Blog;

@@ -40,5 +40,30 @@ app.post('/post',(req,res) =>{
       res.send(err);
     })
 })
+app.delete('/delete/:id',(req,res)=>{
+  console.log(req.params.id)
+  const id = req.params.id
+  Post.findByIdAndDelete(id)
+  .then(res => {
+    console.log(res)
+  })
+  .catch(err => {
+    console.log(err)
+  })
 
+})
+
+app.post('/update/:id', (req,res) => {
+  console.log(req.body)
+  const id = req.body.id
+  const blog = {
+    nom: req.body.nom,
+    message : req.body.message
+  }
+  Post.findByIdAndUpdate(id,blog)
+  .then(result => {
+    console.log(result)
+  })
+  .catch(err => { console.log(err)})
+})
 module.exports = app
