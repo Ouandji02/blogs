@@ -12,7 +12,7 @@ export default function update(props) {
     const [data, setData] = useState({id: id});
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-        axios('http://localhost:8080/all-blogs')
+        axios('https://blog-essaie.herokuapp.com/all-blogs')
             .then(res => {
                res.data.map((doc) => {
                     // eslint-disable-next-line no-undef
@@ -35,7 +35,7 @@ export default function update(props) {
     const updateSubmit = (e) => {
         e.preventDefault()
         console.log(data)
-        axios.post(`http://localhost:8080/update/${id}`, data)
+        axios.post(`https://blog-essaie.herokuapp.com/update/${id}`, data)
         props.history.push('/');
     }
 
@@ -43,7 +43,7 @@ export default function update(props) {
         <div>
             <Typography align="center" variant="h4">Update</Typography>
             <Container maxWidth="xs">
-                <form action="http://localhost:8080/update" method="post" onSubmit={updateSubmit}>
+                <form action="https://blog-essaie.herokuapp.com/update" method="post" onSubmit={updateSubmit}>
                     <Box mb={2} mt={10}>
                         <TextField
                             label="Entrer votre nom"

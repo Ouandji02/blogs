@@ -6,7 +6,7 @@ import axios from 'axios'
 const Blog = ({props}) => {
     const [post, setPost] = useState([]);
     useEffect(() => {
-        axios('http://localhost:8080/all-blogs')
+        axios('https://blog-essaie.herokuapp.com/all-blogs')
             .then(result => {
                 setPost(result.data)
             })
@@ -22,7 +22,7 @@ const Blog = ({props}) => {
 
     const deleteItem = (id) => {
         console.log(id)
-        axios.delete(`http://localhost:8080/delete/${id}`);
+        axios.delete(`https://blog-essaie.herokuapp.com/delete/${id}`);
     }
 
     console.log('propriete',props)

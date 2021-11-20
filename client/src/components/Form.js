@@ -19,7 +19,7 @@ export default function Form() {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(data)
-        axios.post('http://localhost:8080/post', data);
+        axios.post('https://blog-essaie.herokuapp.com/post', data);
     }
 
 
